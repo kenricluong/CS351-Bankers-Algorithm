@@ -1,7 +1,10 @@
 ////===========================================================
 //// bankers_algorithm.cpp
+////-----------------------------------------------------------
+//// copyright by William McCarthy
 ////===========================================================
 //
+
 #include <iostream>
 #include <fstream>
 #include <cstring>
@@ -116,8 +119,8 @@ void* runner(void* param) {           // thread runner
   }
   pthread_mutex_lock(&mutex_);
   std::cout << ">>>>>>>>>>>>>>> Customer thread p#" << c->get_id() << " shutting down... <<<<<<<<<<<<<<<<<\n\n";
-  b->show();
   pthread_mutex_unlock(&mutex_);
+  b->show();
 
   pthread_exit(0);
 }
