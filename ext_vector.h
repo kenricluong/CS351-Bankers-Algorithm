@@ -5,12 +5,11 @@
 //  Created by William McCarthy on 0711//20.
 //
 
-#ifndef __ext_vector_h__
-#define __ext_vector_h__
+#ifndef __EXT_VECTOR_H__
+#define __EXT_VECTOR_H__
 
 #include <iostream>
 #include <iomanip>
-
 #include <vector>
 
 
@@ -18,6 +17,7 @@ template <typename T>
 class ext_vector {
 public:
   ext_vector() : v(std::vector<T>()) { }
+  ext_vector(size_t sz) : v(std::vector<T>(sz)) {}
   ext_vector(size_t size, const T& k) : ext_vector() {
     for (size_t i = 0; i < size; ++i) { v.push_back(k); }
   }
@@ -38,6 +38,7 @@ public:
 //------------------------------------------------------------------
   void add(T& val) { v.push_back(val); }
   void push_back(T& val) { v.push_back(val); }
+  void push_back(T&& val) { v.push_back(val); }
   void clear() {
     while (!empty()) { v.pop_back(); }
   }
@@ -49,6 +50,7 @@ public:
   typename std::vector<T>::const_iterator end()   const { return v.end();   }
 //------------------------------------------------------------------
   ext_vector& operator+=(const ext_vector<T>& other) {    // alloc += req;
+    // size_t n = std::min(v.size, other.size);
     for (int i = 0; i < other.v.size(); ++i) {
       v[i] += other.v[i];
     }
