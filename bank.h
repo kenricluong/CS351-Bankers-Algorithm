@@ -2,13 +2,13 @@
 //  bank.h
 //
 //
-​
+
 #ifndef __BANK_H__
 #define __BANK_H__
-​
+
 #include "customer.h"
-​
-​
+
+
 class Bank {
 public:
   Bank() = default;
@@ -22,13 +22,16 @@ public:
     // go through list of customers, are there enough resources for at least one customer to get to its max?
     // roll back request
     // return anaswer;
-     if( avail >= req){
-        return true;   // TODO: calculate if it is really safe
-      }   
+    if( avail >= req){
+      return true;
+    }
+    return true;
+  }  // TODO: calculate if it is really safe
+
 
   bool req_approved(int id, const ext_vector<int>& req) {
     if (req > avail) { return false; }
-​
+
     Customer* c = customers[id];
     if (c->needs_exceeded(req)) { return false; }
     
@@ -50,8 +53,8 @@ public:
     if (is_avail(req)) { avail -= req; }
   }
   void deposit_resources(const ext_vector<int>& req) { avail += req; }
-​
-​
+
+
   ext_vector<Customer*> get_customers() const { return customers; }
   
   void show() const {
@@ -69,10 +72,10 @@ public:
     be.show();
     return os;
   }
-​
+
 private:
   ext_vector<int> avail;
   ext_vector<Customer*> customers;
 };
-​
+
 #endif /* Bank_h */
