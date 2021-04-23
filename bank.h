@@ -22,18 +22,9 @@ public:
     // go through list of customers, are there enough resources for at least one customer to get to its max?
     // roll back request
     // return anaswer;
-    bool min = false;
-    ext_vector<int> bank_c = this->avail;
-    bank_c -= req;
-
-    for(size_t x = 0; x < this->avail.size(); ++x){
-        if(x == id) continue;
-        if(bank_c >= this->customers[x]->create_req()){
-            min = true;
-        }
-    } 
-     return min;   // TODO: calculate if it is really safe
-  }
+     if( avail >= req){
+        return true;   // TODO: calculate if it is really safe
+      }   
 
   bool req_approved(int id, const ext_vector<int>& req) {
     if (req > avail) { return false; }
